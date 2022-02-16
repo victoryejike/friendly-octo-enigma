@@ -23,7 +23,9 @@ const HomePage = ({ props }) => {
   }, []);
 
   return (
-    <div>Hello World</div>
+    <div>Hello World
+    <p>List of users </p>
+    </div>
   )
 }
 
