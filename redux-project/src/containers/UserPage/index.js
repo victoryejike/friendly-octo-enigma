@@ -28,8 +28,7 @@ const UserPage = ({ props }) => {
   const setLoadingUserActionDispatcher = (bool) => dispatch(setLoading(bool));
 
   const fetchUser = async (id) => {
-    console.log('works')
-    setUserActionDispatcher(null);
+    setUserActionDispatcher(null); //added this line because, the previous user was still being returned for a split second before being updated with new user info
     setLoadingUserActionDispatcher(true);
     const response = await axios.get(`https://reqres.in/api/users/${id}`).catch(err => {
       console.log('err', err);
@@ -46,7 +45,6 @@ const UserPage = ({ props }) => {
 
   useEffect(() => {
     if (userId && (userId !== '' || userId !== null)) fetchUser(userId)
-    // setLoadingUserActionDispatcher();
   }, [userId])
 
   console.log(user, userId, loading);
