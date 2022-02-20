@@ -6,3 +6,10 @@ export const setUser = (user) => {
     payload: user
   }
 }
+
+export const setLoading = (bool) => {
+  return {
+    type: ActionTypes.IS_LOADING,
+    payload: bool,
+  }
+}

@@ -3,49 +3,64 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
-import { setUser } from './actions';
+import { setUser, setLoading } from './actions';
 import { createSelector } from 'reselect';
-import { selectUser } from './selectors';
+import { selectUser, selectUserLoading } from './selectors';
 
 const stateSelector = createSelector(selectUser, (user) => ({
   user
 }))
 
+const loadSelector = createSelector(selectUserLoading, (loading) => ({
+  loading
+}))
+
 const UserPage = ({ props }) => {
   const { user } = useSelector(stateSelector);
+
+  const { loading } = useSelector(loadSelector);
 
   const { userId } = useParams();
 
   const dispatch = useDispatch();
 
-  const setUserActionDispatcher = (user) => dispatch(setUser(user))
+  const setUserActionDispatcher = (user) => dispatch(setUser(user));
+  const setLoadingUserActionDispatcher = (bool) => dispatch(setLoading(bool));
 
   const fetchUser = async (id) => {
+    console.log('works')
+    setUserActionDispatcher(null);
+    setLoadingUserActionDispatcher(true);
     const response = await axios.get(`https://reqres.in/api/users/${id}`).catch(err => {
       console.log('err', err);
     })
     
     console.log('user', response.data.data);
-    // setUserActionDispatcher(response.data.data)
+    // setUser(response.data.data)
     
-    if (response) 
+    if (response) {
       setUserActionDispatcher(response.data.data)
-    
+      setLoadingUserActionDispatcher(false);
+    }
   }
 
   useEffect(() => {
-    if (userId && userId !== '') {
-      fetchUser(userId);
-    }
+    if (userId && (userId !== '' || userId !== null)) fetchUser(userId)
+    // setLoadingUserActionDispatcher();
   }, [userId])
 
-  console.log(user, userId);
+  console.log(user, userId, loading);
 
   return (
     <div>
-      <img src={user.avatar} alt="avatar" />
-      <p>{user.first_name} {user.last_name}</p>
-      <small>{user.email}</small>
+      {
+        (loading && !user) ? <div>Loading...</div>
+        : (<div>
+            <img src={user.avatar} alt={user.first_name} />
+            <p>{user.first_name} {user.last_name}</p>
+            <small>{user.email}</small>
+          </div>)
+      }
     </div>
   )
 }

@@ -10,7 +10,6 @@ function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/user/:userId" component={UserPage} />
-          <Route>404 Not Found!</Route>
         </Switch>
       </div>
     </Router>
