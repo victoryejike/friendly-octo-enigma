@@ -28,14 +28,10 @@ const UserPage = ({ props }) => {
   const setLoadingUserActionDispatcher = (bool) => dispatch(setLoading(bool));
 
   const fetchUser = async (id) => {
-    setUserActionDispatcher(null); //added this line because, the previous user was still being returned for a split second before being updated with new user info
     setLoadingUserActionDispatcher(true);
     const response = await axios.get(`https://reqres.in/api/users/${id}`).catch(err => {
       console.log('err', err);
     })
-    
-    console.log('user', response.data.data);
-    // setUser(response.data.data)
     
     if (response) {
       setUserActionDispatcher(response.data.data)
@@ -44,15 +40,14 @@ const UserPage = ({ props }) => {
   }
 
   useEffect(() => {
-    if (userId && (userId !== '' || userId !== null)) fetchUser(userId)
+    if (userId && userId !== '') fetchUser(userId)
+    return () => setUserActionDispatcher({}); //added this line because, the previous user was still being returned for a split second before being updated with new user info
   }, [userId])
-
-  console.log(user, userId, loading);
 
   return (
     <div>
       {
-        (loading && !user) ? <div>Loading...</div>
+        (Object.keys(user).length === 0 && loading) ? <div>Loading...</div>
         : (<div>
             <img src={user.avatar} alt={user.first_name} />
             <p>{user.first_name} {user.last_name}</p>

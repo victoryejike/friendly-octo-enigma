@@ -1,7 +1,7 @@
 import { ActionTypes } from './constants'
 
 const initialState = {
-  user: null,
+  user: {},
   loading: true
 }
 
