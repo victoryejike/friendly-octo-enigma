@@ -4,28 +4,28 @@ import { Link } from 'react-router-dom';
 
 const ProductComponent = () => {
   const products = useSelector((state) => state.allproducts.products)
-  console.log(products);
 
-  const renderList = products.map(product => {
+   const renderList = products.map((product) => {
+    const { id, title, image, price, category } = product;
     return (
-      <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'flex-start', margin: '1rem auto', width: '30%'}} key={product.id}>
-        <Link to={`/product/${product.id}`}>
-          <div className='ui link cards'>
-            <div className='card'>
-              <div className='image'>
-                <img src={product.image} alt={product.title} />
+      <div className="four wide column" key={id}>
+        <Link to={`/product/${id}`}>
+          <div className="ui link cards">
+            <div className="card">
+              <div className="image">
+                <img src={image} alt={title} />
               </div>
-              <div className='content'>
-                <div className='header'>{product.title}</div>
-                <div className=' price'><b>$ {product.price}</b></div>
-                <div className='meta'>{product.category}</div>
+              <div className="content">
+                <div className="header">{title}</div>
+                <div className="meta price">$ {price}</div>
+                <div className="meta">{category}</div>
               </div>
             </div>
           </div>
         </Link>
       </div>
-    )
-  })
+    );
+  });
 
   return (
     <>

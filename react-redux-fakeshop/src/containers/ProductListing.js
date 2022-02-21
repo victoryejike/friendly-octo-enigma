@@ -20,8 +20,6 @@ const ProductListing = () => {
     fetchProducts();
   }, []);
 
-  console.log({product})
-
   return (
     <div className='ui grid container' style={{paddingTop: '5rem'}}>
       {

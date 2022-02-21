@@ -8,16 +8,14 @@ const ProductDetail = () => {
   const { productId } = useParams();
   const dispatch = useDispatch();
 
-  const product = useSelector((state) => state.product)
-
-  console.log(productId);
+  const product = useSelector((state) => state.product);
+  const { image, price, category, description, title } = product
 
   const fetchProduct = async (productId) => {
     const response = await axios.get(`https://fakestoreapi.com/products/${productId}`).catch(err => {
       console.log(err);
     });
 
-    // console.log(response.data);
     dispatch(selectedProduct(response.data));
   }
 
@@ -25,10 +23,6 @@ const ProductDetail = () => {
     if (productId && productId !== '') fetchProduct(productId);
     return () => dispatch(removeSelectedProduct())
   }, [productId]);
-
-  console.log(product);
-
-  const { image, price, category, description, title } = product
 
   return (
     <div>
