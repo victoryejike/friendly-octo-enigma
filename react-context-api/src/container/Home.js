@@ -20,6 +20,10 @@ const Card = styled.div`
   border-bottom-right-radius: 2rem;
 `
 
+const Text = styled.p`
+  text-align: center;
+`
+
 const Button = styled.button`
   background-color: #607D8B;
   color: #ECEFF1;
@@ -55,10 +59,13 @@ const Home = () => {
 
   return (
     <div>
+      <Text><b>Number of Students: {student.length}</b></Text>
       {
         Object.keys(student).length === 0 ? <div>...Loading</div>
         : (
-          <Wrapper>{studentList}</Wrapper>
+          <Wrapper>
+            {studentList}
+          </Wrapper>
         )
       }
       {
