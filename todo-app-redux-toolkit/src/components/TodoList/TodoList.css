@@ -1,0 +1,29 @@
+.todolist {
+  margin: 11rem 0;
+  padding-bottom: 22.35rem;
+}
+
+.todos {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  width: 34%;
+  padding: 1.2rem;
+  border-radius: 0.1rem;
+  outline: none;
+  border-bottom: 1px solid var(--VeryDarkGrayishBlue);
+  font-size: 18px;
+  background-color: var(--VeryDarkDesaturatedBlue);
+  color: var(--LightGrayBlue);
+}
+
+.todos > li {
+  list-style: none;
+  padding-left: 1rem;
+}
+
+.todos > img {
+  cursor: pointer;
+}

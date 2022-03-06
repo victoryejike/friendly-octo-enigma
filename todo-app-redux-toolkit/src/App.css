@@ -1,3 +1,33 @@
 .App {
   text-align: center;
+  font-size: var(--fontSize);
+  font-weight: 400;
+  background-color: var(--VeryDarkBlue);
+}
+
+.app-header-bg {
+  background-image: url(./images/bg-desktop-dark.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 7rem;
+}
+
+.app-header-bg > * {
+  /* padding: 11rem; */
+  margin-bottom: 5rem;
+}
+
+.app-header-bg > h1 {
+  font-size: 35px;
+  letter-spacing: 0.7rem;
+  padding-right: 30rem;
+  color: var(--VeryLightGray);
+}
+
+.app-header-bg > img {
+  cursor: pointer;
 }
