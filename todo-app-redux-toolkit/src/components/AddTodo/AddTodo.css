@@ -2,8 +2,8 @@
   margin: -8rem 0;
 }
 
-input {
-  width: 34%;
+.input {
+  width: 30.8%;
   padding: 0.9rem;
   border-radius: 0.1rem;
   outline: none;
@@ -12,4 +12,15 @@ input {
   background-color: var(--VeryDarkDesaturatedBlue);
   color: var(--LightGrayBlue);
   caret-color: var(--activeColor);
+}
+
+.btn {
+  padding: 0.9rem;
+  border-radius: 0.1rem;
+  outline: none;
+  border: 1px solid var(--VeryDarkGrayishBlue);
+  font-size: 18px;
+  background-color: var(--VeryDarkDesaturatedBlue);
+  color: var(--LightGrayBlue);
+  cursor: pointer;
 }
