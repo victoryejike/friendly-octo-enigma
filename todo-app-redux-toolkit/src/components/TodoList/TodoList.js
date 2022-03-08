@@ -4,29 +4,27 @@ import cross from '../../images/icon-cross.svg';
 
 const TodoList = ({ todos }) => {
   // const [activeColor, setActiveColor] = useState(false);
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(new Array(todos.length).fill(false)); //how to deal with multiple checkboxes
 
   const handleClick = () => {
     console.log('delete');
   }
 
-  const handleChange = (id, i) => {
-    console.log(id, i)
-    if (id === i) {
-      setChecked(!checked);
-    }
-  }
+  const handleChange = (id) => {
+    const updateCheckState = checked.map((item, index) => index === id ? !item : item)
 
-  console.log(checked);
+    setChecked(updateCheckState);
+  }
 
   return (
     <div className='todolist'>
       {
-        todos.map((todo, i) => (
+        todos.map((todo, index) => (
           <div className='todos' key={todo.id}>
             <label>
-              <input type='checkbox' checked={checked} onChange={()=>handleChange(todo.id, (i+1))} />
+              <input id={`custom-checkbox-${index}`} type='checkbox' checked={checked[index]} onChange={()=>handleChange(index)} />
               <li>{todo.todo}</li>
+              <span className='checkmark'></span>
             </label>
             <img src={cross} alt='check todos' onClick={handleClick} />
           </div>
