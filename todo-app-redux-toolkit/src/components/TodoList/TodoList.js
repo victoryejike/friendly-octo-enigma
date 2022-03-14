@@ -1,13 +1,20 @@
 import React, { useState } from 'react'
 import './TodoList.css'
 import cross from '../../images/icon-cross.svg';
+import { useSelector, useDispatch } from 'react-redux';
+import { getAllTodos, removeTodos } from '../../redux/todoSlice';
 
 const TodoList = ({ todos }) => {
+  const dispatch = useDispatch();
+  const allTodos = useSelector(getAllTodos)
+  console.log(allTodos)
   // const [activeColor, setActiveColor] = useState(false);
-  const [checked, setChecked] = useState(new Array(todos.length).fill(false)); //how to deal with multiple checkboxes
+  const [checked, setChecked] = useState(new Array(allTodos.length).fill(false)); //how to deal with multiple checkboxes
 
-  const handleClick = () => {
-    console.log('delete');
+  const handleClick = (id) => {
+    console.log('delete', id);
+    
+    dispatch(removeTodos(id))
   }
 
   const handleChange = (id) => {
@@ -19,19 +26,19 @@ const TodoList = ({ todos }) => {
   return (
     <div className='todolist'>
       {
-        todos.map((todo, index) => (
+        allTodos.map((todo, index) => (
           <div className='todos' key={todo.id}>
             <label>
               <input id={`custom-checkbox-${index}`} type='checkbox' checked={checked[index]} onChange={()=>handleChange(index)} />
               <li>{todo.todo}</li>
               <span className='checkmark'></span>
             </label>
-            <img src={cross} alt='check todos' onClick={handleClick} />
+            <img src={cross} alt='check todos' onClick={() => handleClick(todo.id)} />
           </div>
         ))
-      }
+        }
       <div className='filter'>
-        <span>5 items left</span>
+        <span>{allTodos.length} items left</span>
         <div className='filter-tasks'>
           <button className='filter-btn active'>All</button>
           <button className='filter-btn'>Active</button>

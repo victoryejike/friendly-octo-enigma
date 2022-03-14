@@ -28,12 +28,16 @@
   --VeryDarkGrayBlue: hsl(237, 14%, 26%);
 }
 
+html {
+  background-color: var(--VeryDarkBlue);
+  min-height: 100vh;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: var(--fontFamily);
-  max-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
