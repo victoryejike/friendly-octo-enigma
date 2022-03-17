@@ -137,3 +137,7 @@ label .checkmark:after {
   padding-top: 3rem;
   color: var(--VeryDarkGrayBlues);
 }
+
+.strikethrough {
+  text-decoration: line-through;
+}

@@ -12,14 +12,14 @@ const AddTodo = () => {
 
     if (todo === '') alert('please add a new task');
 
-    dispatch(addTodos({id: Math.floor(Math.random() * 1000) * 1 , todo: todo}));
+    dispatch(addTodos({id: Date.now().toString() , todo: todo, complete: false}));
 
     setTodo('');
   }
 
   return (
     <form onSubmit={handleSubmit} className='addtodo'>
-      <input className='input' type='text' placeholder='Create a new todo' onChange={(e) => setTodo(e.target.value)} value={todo} />
+      <input className='input' type='text' placeholder='Elite, your goals for today?' onChange={(e) => setTodo(e.target.value)} value={todo} />
       <button className='btn'>Add</button>
     </form>
   )

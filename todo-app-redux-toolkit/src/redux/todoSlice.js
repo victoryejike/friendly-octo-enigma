@@ -2,27 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   todos: [
-    {
-      id: 1,
-      todo: 'Jog around the park 3x'
-    },
-    {
-      id: 2,
-      todo: '10 minutes meditation'
-    },
-    {
-      id: 3,
-      todo: 'Read for 1 hour'
-    },
-    {
-      id: 4,
-      todo: 'Pick up groceries'
-    },
-    {
-      id: 5,
-      todo: 'Complete Todo App'
-    }
-  ],
+    
+  ]
 }
 
 const todoSlice = createSlice({
@@ -34,12 +15,35 @@ const todoSlice = createSlice({
     },
     removeTodos: (state, { payload }) => {
       state.todos = state.todos.filter(todo => todo.id !== payload)
-    }
+    },
   }
 })
 
-export const { addTodos, removeTodos } = todoSlice.actions;
+export const { addTodos, removeTodos, completeTodos } = todoSlice.actions;
 
 export const getAllTodos = (state) => state.todos.todos
 
+export const getAllTodosLength = (state) => (state.todos.todos).length
+
+// export const isComplete = (state) => state.todos.complete
+
 export default todoSlice.reducer;
+
+/*
+{
+      id: 1,
+      todo: 'Jogging',
+      complete: false
+    },
+    {
+      id: 2,
+      todo: 'Walking',
+      complete: false
+    },
+    {
+      id: 3,
+      todo: 'flopping',
+      complete: false
+    },
+
+*/

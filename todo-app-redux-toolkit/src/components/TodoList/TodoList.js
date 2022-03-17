@@ -1,15 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './TodoList.css'
 import cross from '../../images/icon-cross.svg';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllTodos, removeTodos } from '../../redux/todoSlice';
+import { getAllTodos, removeTodos, getAllTodosLength } from '../../redux/todoSlice';
 
-const TodoList = ({ todos }) => {
+const TodoList = () => {
   const dispatch = useDispatch();
   const allTodos = useSelector(getAllTodos)
-  console.log(allTodos)
-  // const [activeColor, setActiveColor] = useState(false);
-  const [checked, setChecked] = useState(new Array(allTodos.length).fill(false)); //how to deal with multiple checkboxes
+  const length = useSelector(getAllTodosLength)
+  // const isCompleted = useSelector(isComplete)
+  const newArr = allTodos.length;
+  console.log(newArr, length);
+  const [checked, setChecked] = useState([]); //how to deal with multiple checkboxes
 
   const handleClick = (id) => {
     console.log('delete', id);
@@ -21,16 +23,27 @@ const TodoList = ({ todos }) => {
     const updateCheckState = checked.map((item, index) => index === id ? !item : item)
 
     setChecked(updateCheckState);
+    // dispatch(completeTodos())
   }
+
+  useEffect(() => {
+    if (length > 0) {
+      setChecked(new Array(allTodos.length).fill(false))
+    }
+
+    return
+  }, [allTodos, length])
+
+  console.log(checked);
 
   return (
     <div className='todolist'>
       {
-        allTodos.map((todo, index) => (
+        Object.keys(allTodos).length === 0 ? <h4>All done!, Well done Elite!</h4> : allTodos.map((todo, index) => (
           <div className='todos' key={todo.id}>
             <label>
-              <input id={`custom-checkbox-${index}`} type='checkbox' checked={checked[index]} onChange={()=>handleChange(index)} />
-              <li>{todo.todo}</li>
+              <input id={`custom-checkbox-${index}`} type='checkbox' checked={checked[index]}  onChange={()=>handleChange(index)} />
+              <li className={checked[index] ? 'strikethrough' : ''}>{todo.todo}</li>
               <span className='checkmark'></span>
             </label>
             <img src={cross} alt='check todos' onClick={() => handleClick(todo.id)} />
