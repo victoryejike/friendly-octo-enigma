@@ -16,6 +16,9 @@ const todoSlice = createSlice({
     removeTodos: (state, { payload }) => {
       state.todos = state.todos.filter(todo => todo.id !== payload)
     },
+    completeTodos: (state, { payload }) => {
+      
+    }
   }
 })
 
@@ -24,6 +27,8 @@ export const { addTodos, removeTodos, completeTodos } = todoSlice.actions;
 export const getAllTodos = (state) => state.todos.todos
 
 export const getAllTodosLength = (state) => (state.todos.todos).length
+
+export const getCheckedState = () => new Array(getAllTodosLength).fill(false);
 
 // export const isComplete = (state) => state.todos.complete
 

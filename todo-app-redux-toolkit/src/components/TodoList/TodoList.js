@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react'
 import './TodoList.css'
 import cross from '../../images/icon-cross.svg';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllTodos, removeTodos, getAllTodosLength } from '../../redux/todoSlice';
+import { getAllTodos, removeTodos, completeTodos, getAllTodosLength, getCheckedState } from '../../redux/todoSlice';
 
 const TodoList = () => {
   const dispatch = useDispatch();
   const allTodos = useSelector(getAllTodos)
   const length = useSelector(getAllTodosLength)
+  const checkboxArr = useSelector(getCheckedState);
   // const isCompleted = useSelector(isComplete)
   const newArr = allTodos.length;
-  console.log(newArr, length);
+  console.log(newArr, length, checkboxArr);
   const [checked, setChecked] = useState([]); //how to deal with multiple checkboxes
 
   const handleClick = (id) => {
@@ -19,11 +20,11 @@ const TodoList = () => {
     dispatch(removeTodos(id))
   }
 
-  const handleChange = (id) => {
+  const handleChange = (id, index) => {
     const updateCheckState = checked.map((item, index) => index === id ? !item : item)
 
     setChecked(updateCheckState);
-    // dispatch(completeTodos())
+    dispatch(completeTodos(index))
   }
 
   useEffect(() => {
@@ -34,7 +35,7 @@ const TodoList = () => {
     return
   }, [allTodos, length])
 
-  console.log(checked);
+  console.log(checked, allTodos);
 
   return (
     <div className='todolist'>
@@ -42,7 +43,7 @@ const TodoList = () => {
         Object.keys(allTodos).length === 0 ? <h4>All done!, Well done Elite!</h4> : allTodos.map((todo, index) => (
           <div className='todos' key={todo.id}>
             <label>
-              <input id={`custom-checkbox-${index}`} type='checkbox' checked={checked[index]}  onChange={()=>handleChange(index)} />
+              <input id={`custom-checkbox-${index}`} type='checkbox' checked={allTodos[index].complete}  onChange={()=>handleChange(index, todo.id)} />
               <li className={checked[index] ? 'strikethrough' : ''}>{todo.todo}</li>
               <span className='checkmark'></span>
             </label>
