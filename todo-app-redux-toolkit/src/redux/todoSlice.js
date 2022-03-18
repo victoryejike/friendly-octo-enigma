@@ -17,7 +17,7 @@ const todoSlice = createSlice({
       state.todos = state.todos.filter(todo => todo.id !== payload)
     },
     completeTodos: (state, { payload }) => {
-      
+      getCheckedState
     }
   }
 })
