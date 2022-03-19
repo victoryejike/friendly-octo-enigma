@@ -1,62 +1,68 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import './TodoList.css'
 import cross from '../../images/icon-cross.svg';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllTodos, removeTodos, completeTodos, getAllTodosLength, getCheckedState } from '../../redux/todoSlice';
+import { getAllTodos, removeTodos, completeTodos, getAllCheckBoxes } from '../../redux/todoSlice';
 
 const TodoList = () => {
   const dispatch = useDispatch();
-  const allTodos = useSelector(getAllTodos)
-  const length = useSelector(getAllTodosLength)
-  const checkboxArr = useSelector(getCheckedState);
-  // const isCompleted = useSelector(isComplete)
-  const newArr = allTodos.length;
-  console.log(newArr, length, checkboxArr);
-  const [checked, setChecked] = useState([]); //how to deal with multiple checkboxes
+  const todos = useSelector(getAllTodos)
+  const newCheckboxArr = useSelector(getAllCheckBoxes)
+
+  const [active, setActive] = useState(false);
+
+  const allTodos = () => {
+    if (active === true) todos.map((todo, index) => newCheckboxArr[index] === false ? todo : null)
+    return todos;
+  }
+
+  // const [checked, setChecked] = useState([]); //how to deal with multiple checkboxes
 
   const handleClick = (id) => {
-    console.log('delete', id);
-    
     dispatch(removeTodos(id))
   }
 
-  const handleChange = (id, index) => {
-    const updateCheckState = checked.map((item, index) => index === id ? !item : item)
-
-    setChecked(updateCheckState);
-    dispatch(completeTodos(index))
+  const handleChange = (id) => {
+    dispatch(completeTodos(id))
   }
 
-  useEffect(() => {
-    if (length > 0) {
-      setChecked(new Array(allTodos.length).fill(false))
-    }
+  const handleAllClick = () => {
+    console.log('all');
+    return allTodos
+  }
 
-    return
-  }, [allTodos, length])
+  const handleActiveClick = () => {
+    setActive(!active);
+    // console.log('active', newCheckboxArr);
+    // return allTodos = allTodos.map((todo, index) => newCheckboxArr[index] === false ? todo : null)
+    // console.log(allTodos)
+  }
 
-  console.log(checked, allTodos);
+  const handleCompleteClick = () => {
+    console.log('complete');
+    // allTodos = allTodos;
+  }
 
   return (
     <div className='todolist'>
       {
-        Object.keys(allTodos).length === 0 ? <h4>All done!, Well done Elite!</h4> : allTodos.map((todo, index) => (
+        Object.keys(todos).length === 0 ? <h4>Keep building, keep pushing Elite!</h4> : todos.map((todo, index) => (
           <div className='todos' key={todo.id}>
             <label>
-              <input id={`custom-checkbox-${index}`} type='checkbox' checked={allTodos[index].complete}  onChange={()=>handleChange(index, todo.id)} />
-              <li className={checked[index] ? 'strikethrough' : ''}>{todo.todo}</li>
+              <input id={`custom-checkbox-${index}`} type='checkbox' checked={newCheckboxArr[index]}  onChange={()=>handleChange(index)} />
+              <li className={newCheckboxArr[index] ? 'strikethrough' : ''}>{todo.todo}</li>
               <span className='checkmark'></span>
             </label>
-            <img src={cross} alt='check todos' onClick={() => handleClick(todo.id)} />
+            <img src={cross} alt='check todos' onClick={() => handleClick(index)} />
           </div>
         ))
         }
       <div className='filter'>
         <span>{allTodos.length} items left</span>
         <div className='filter-tasks'>
-          <button className='filter-btn active'>All</button>
-          <button className='filter-btn'>Active</button>
-          <button className='filter-btn'>Completed</button>
+          <button className='filter-btn active' onClick={handleAllClick}>All</button>
+          <button className='filter-btn' onClick={handleActiveClick}>Active</button>
+          <button className='filter-btn' onClick={handleCompleteClick}>Completed</button>
         </div>
         <button className='filter-btn'>Clear Completed</button>
       </div>
