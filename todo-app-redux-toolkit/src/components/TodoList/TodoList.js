@@ -2,19 +2,27 @@ import React, { useState } from 'react'
 import './TodoList.css'
 import cross from '../../images/icon-cross.svg';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllTodos, removeTodos, completeTodos, getAllCheckBoxes } from '../../redux/todoSlice';
+import { removeTodos, completeTodos, getAllCheckBoxes } from '../../redux/todoSlice';
 
 const TodoList = () => {
   const dispatch = useDispatch();
-  const todos = useSelector(getAllTodos)
-  const newCheckboxArr = useSelector(getAllCheckBoxes)
+  let newCheckboxArr = useSelector(getAllCheckBoxes)
+  const [active, setActive] = useState('');
 
-  const [active, setActive] = useState(false);
+  const allTodos = useSelector((state) => {
+    const todos = state.todos.todos
+    if (active === 'active') {
+      newCheckboxArr = newCheckboxArr.map((check, index) => newCheckboxArr[index] !== true ? check : null)
 
-  const allTodos = () => {
-    if (active === true) todos.map((todo, index) => newCheckboxArr[index] === false ? todo : null)
-    return todos;
-  }
+      return todos.filter((todo, index) => newCheckboxArr[index] === false)
+    } else if (active === 'complete') {
+      newCheckboxArr = newCheckboxArr.map((check, index) => newCheckboxArr[index] !== false ? check : null)
+
+      return todos.filter((todo, index) => newCheckboxArr[index] === true)
+    } else if (active === '') {
+      return todos;
+    }
+  })
 
   // const [checked, setChecked] = useState([]); //how to deal with multiple checkboxes
 
@@ -28,32 +36,28 @@ const TodoList = () => {
 
   const handleAllClick = () => {
     console.log('all');
-    return allTodos
+    setActive('');
   }
 
   const handleActiveClick = () => {
-    setActive(!active);
-    // console.log('active', newCheckboxArr);
-    // return allTodos = allTodos.map((todo, index) => newCheckboxArr[index] === false ? todo : null)
-    // console.log(allTodos)
+    setActive('active')
   }
 
   const handleCompleteClick = () => {
-    console.log('complete');
-    // allTodos = allTodos;
+    setActive('complete')
   }
 
   return (
     <div className='todolist'>
       {
-        Object.keys(todos).length === 0 ? <h4>Keep building, keep pushing Elite!</h4> : todos.map((todo, index) => (
+        Object.keys(allTodos).length === 0 ? <h4>Keep building, keep pushing Elite!</h4> : allTodos.map((todo, index) => (
           <div className='todos' key={todo.id}>
             <label>
-              <input id={`custom-checkbox-${index}`} type='checkbox' checked={newCheckboxArr[index]}  onChange={()=>handleChange(index)} />
+              <input id={`custom-checkbox-${index}`} type='checkbox' checked={newCheckboxArr[index]} onChange={active === '' ? ()=>handleChange(index) : null} />
               <li className={newCheckboxArr[index] ? 'strikethrough' : ''}>{todo.todo}</li>
               <span className='checkmark'></span>
             </label>
-            <img src={cross} alt='check todos' onClick={() => handleClick(index)} />
+            <img src={cross} alt='check todos' onClick={active === '' ? () => handleClick(index) : null} />
           </div>
         ))
         }
