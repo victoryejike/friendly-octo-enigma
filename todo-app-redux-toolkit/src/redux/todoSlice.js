@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   todos: [],
-  checkedTodos: [],
 }
 
 const todoSlice = createSlice({
@@ -11,22 +10,21 @@ const todoSlice = createSlice({
   reducers: {
     addTodos: (state, { payload }) => {
       state.todos.push(payload);
-      state.checkedTodos.push(false);
     },
     removeTodos: (state, { payload }) => {
-      state.todos = state.todos.filter((todo, index) => index !== payload)
-      state.checkedTodos = state.checkedTodos.filter((check, index) => index !== payload)
+      state.todos = state.todos.filter((todo) => todo.id !== payload)
+    },
+    filterTodos: (state) => {
+      state.todos = state.todos.filter((todo) => todo.complete !== true)
     },
     completeTodos: (state, { payload }) => {
-      state.checkedTodos = state.checkedTodos.map((item, index) => index === payload ? !item : item)
+      state.todos = state.todos.map((todo) => todo.id === payload ? {...todo, complete: !todo.complete} : {...todo, complete: todo.complete})
     }
   }
 })
 
-export const { addTodos, removeTodos, completeTodos } = todoSlice.actions;
+export const { addTodos, removeTodos, completeTodos, filterTodos } = todoSlice.actions;
 
 export const getAllTodos = (state) => state.todos.todos
-
-export const getAllCheckBoxes = (state) => state.todos.checkedTodos
 
 export default todoSlice.reducer;

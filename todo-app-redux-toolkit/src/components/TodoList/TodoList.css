@@ -1,5 +1,5 @@
 .todolist {
-  margin: 11rem 0;
+  margin: 9.8rem 0;
 }
 
 .todos {
@@ -16,6 +16,12 @@
   font-size: 18px;
   background-color: var(--VeryDarkDesaturatedBlue);
   color: var(--LightGrayBlue);
+}
+
+h4 {
+  margin: 1rem 0;
+  color: var(--LightGrayBlue);
+  font-weight: 200;
 }
 
 .todos > label {
@@ -140,8 +146,4 @@ label .checkmark:after {
 
 .strikethrough {
   text-decoration: line-through;
-}
-
-.disabled {
-  cursor: not-allowed;
 }
