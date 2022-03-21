@@ -31,7 +31,7 @@ const MovieListing = () => {
   ))
   ) : (
     <div className='movies-error'>
-      <h3>{movies.Error}</h3>
+      <h3 className='loading'>{movies.Error}</h3>
     </div>
   )
   return (
@@ -41,7 +41,7 @@ const MovieListing = () => {
         <div className='movie-container'>
           {
             isLoading ? (
-              <div>...Loading</div>
+              <div className='loading'>...Loading</div>
             ) : (
               <Slider { ...Settings }>{renderMovies}</Slider>
             )
@@ -53,7 +53,7 @@ const MovieListing = () => {
         <div className='movie-container'>
           {
             isLoading ? (
-              <div>...Loading</div>
+              <div className='loading'>...Loading</div>
             ) : (
               <Slider { ...Settings }>{renderShows}</Slider>
             )

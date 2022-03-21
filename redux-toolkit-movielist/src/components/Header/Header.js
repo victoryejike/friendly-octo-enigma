@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
-import user from '../../images/movieuser.png'
+import Logo from '../../images/Logo.png'
 import './Header.scss'
 import { fetchAsyncMovies, fetchAsyncShows } from '../../features/movies/movieSlice';
 
@@ -19,18 +19,18 @@ const Header = () => {
   }
 
   return (
-    <div className='header'>
-      <Link to='/'>
-        <div className='logo'>Movie App</div>
-      </Link>
+    <div>
+      <div className='header'>
+        <Link to='/'>
+          <div className='logo'><img src={Logo} alt='logo' /></div>
+        </Link>
+      </div>
+      <div className="banner-img"><h1>Watch something incredible.</h1></div>
       <div className='search-bar'>
         <form onSubmit={submitHandler}>
-          <input type='text' value={term} placeholder='Search Movies or Series' onChange={(e) => setTerm(e.target.value)} />
-          <button type='submit'><i className='fa fa-search'></i></button>
+          <label className='search-text'>Search</label>
+          <input type='text' value={term} onChange={(e) => setTerm(e.target.value)} />
         </form>
-      </div>
-      <div className='user-image'>
-        <img src={ user } alt='user' />
       </div>
     </div>
   )

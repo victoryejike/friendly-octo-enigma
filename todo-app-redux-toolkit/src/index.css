@@ -11,25 +11,30 @@
 
   /* light theme */
 
-  --VeryLightGray: hsl(0, 0%, 98%);
-  --VeryLightGrayishBlue: hsl(236, 33%, 92%);
-  --LightGrayishBlue: hsl(233, 11%, 84%);
+  /* --background: hsl(0, 0%, 98%); */
+  --background: hsl(236, 33%, 92%);
+  /* --text: hsl(233, 11%, 84%); */
   --DarkGrayishBlue: hsl(236, 9%, 61%);
   --VeryDarkGrayishBlue: hsl(235, 19%, 35%);
+  --inputbg: hsl(0, 0%, 98%);
+  --text: hsl(233, 14%, 35%);
+  --header-text: hsl(236, 33%, 92%);
 
   /* Dark theme */
 
-  --VeryDarkBlue: hsl(235, 21%, 11%);
-  --VeryDarkDesaturatedBlue: hsl(235, 24%, 19%);
+  --inputbg-dark: hsl(235, 24%, 19%);
   --LightGrayishBlues: hsl(234, 39%, 85%);
-  --LightGrayBlue: hsl(236, 33%, 92%); /* hover */
+  --text-dark: hsl(236, 33%, 92%); /* hover */
+  --header-text-dark: hsl(236, 33%, 92%);
   --DarkGrayBlue: hsl(234, 11%, 52%);
   --VeryDarkGrayBlues: hsl(233, 14%, 35%);
   --VeryDarkGrayBlue: hsl(237, 14%, 26%);
+
+  --background-dark: hsl(235, 21%, 11%);
 }
 
 html {
-  background-color: var(--VeryDarkBlue);
+  background-color: var(--background);
   min-height: 100vh;
 }
 
@@ -40,4 +45,22 @@ html {
   font-family: var(--fontFamily);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--background-dark);
+    --inputbg: var(--inputbg-dark);
+    --text: var(--text-dark);
+    --header-text: var(--header-text-dark);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: var(--background);
+    --inputbg: var(--inputbg);
+    --text: var(--text);
+    --header-text: var(--header-text);
+  }
 }

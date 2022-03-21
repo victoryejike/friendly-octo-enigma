@@ -24,7 +24,7 @@
   font-size: 35px;
   letter-spacing: 0.7rem;
   padding-right: 30rem;
-  color: var(--VeryLightGray);
+  color: var(--header-text);
 }
 
 .app-header-bg > img {

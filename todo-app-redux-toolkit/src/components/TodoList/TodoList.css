@@ -14,13 +14,13 @@
   outline: none;
   border-bottom: 1px solid var(--VeryDarkGrayishBlue);
   font-size: 18px;
-  background-color: var(--VeryDarkDesaturatedBlue);
-  color: var(--LightGrayBlue);
+  background-color: var(--inputbg);
+  color: var(--text);
 }
 
 h4 {
   margin: 1rem 0;
-  color: var(--LightGrayBlue);
+  color: var(--header-text);
   font-weight: 200;
 }
 
@@ -91,7 +91,7 @@ label .checkmark:after {
   top: 3.7px;
   width: 4px;
   height: 9px;
-  border: solid var(--LightGrayBlue);
+  border: solid var(--text);
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
@@ -113,7 +113,7 @@ label .checkmark:after {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--VeryDarkDesaturatedBlue);
+  background-color: var(--inputbg);
   padding: 1.2rem;
   color: var(--VeryDarkGrayBlues);
 }
@@ -133,6 +133,7 @@ label .checkmark:after {
 .filter-tasks > .filter-btn:hover,
 .filter-tasks > .filter-btn:focus {
   color: var(--activeColor);
+  font-weight: 700;
 }
 
 .active {
