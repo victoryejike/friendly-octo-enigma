@@ -12,7 +12,7 @@
   padding: 1.2rem;
   border-radius: 0.1rem;
   outline: none;
-  border-bottom: 1px solid var(--VeryDarkGrayishBlue);
+  border-bottom: 1px solid var(--border-color);
   font-size: 18px;
   background-color: var(--inputbg);
   color: var(--text);
@@ -91,7 +91,7 @@ label .checkmark:after {
   top: 3.7px;
   width: 4px;
   height: 9px;
-  border: solid var(--text);
+  border: solid var(--header-text);
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
