@@ -1,5 +1,5 @@
 .todolist {
-  margin: 9.8rem 0;
+  margin: 9.8rem auto;
 }
 
 .todos {
@@ -16,6 +16,11 @@
   font-size: 18px;
   background-color: var(--inputbg);
   color: var(--text);
+}
+
+.todos:first-child {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
 }
 
 h4 {
@@ -50,9 +55,15 @@ label > input {
   height: 25px;
   width: 25px;
   border-radius: 50%;
-  border: 1px solid;
-  /* border-image: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%)); */
-  background-color: transparent;
+  border: 1px solid transparent;
+  background: linear-gradient(
+      to right,
+      rgb(var(--accent-color)),
+      rgb(var(--accent-color))
+    ),
+    linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
 }
 
 /* On mouse-over, add a grey background color */
@@ -88,7 +99,7 @@ label input:checked ~ .checkmark:after {
 /* Style the checkmark/indicator */
 label .checkmark:after {
   left: 8px;
-  top: 3.7px;
+  top: 4.4px;
   width: 4px;
   height: 9px;
   border: solid var(--header-text);
@@ -116,6 +127,8 @@ label .checkmark:after {
   background-color: var(--inputbg);
   padding: 1.2rem;
   color: var(--VeryDarkGrayBlues);
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
 }
 
 .filter-btn {
@@ -147,4 +160,46 @@ label .checkmark:after {
 
 .strikethrough {
   text-decoration: line-through;
+  color: var(--strikethrough-color);
+}
+
+.mobile {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .todos,
+  .filter {
+    /* margin-top: 1rem; */
+    width: 85%;
+  }
+
+  .filter {
+    padding: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .todos,
+  .filter {
+    /* margin-top: 1rem; */
+    width: 88%;
+  }
+
+  .filter {
+    padding: 1.2rem;
+  }
+
+  .filter-tasks {
+    display: none;
+  }
+
+  .mobile {
+    display: block;
+    background-color: var(--inputbg);
+    padding: 1.2rem;
+    width: 88%;
+    margin: 1rem auto;
+    border-radius: 0.5rem;
+  }
 }

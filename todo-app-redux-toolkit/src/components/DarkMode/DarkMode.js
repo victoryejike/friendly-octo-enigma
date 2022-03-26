@@ -28,7 +28,6 @@ const DarkMode = () => {
   const [darkmode, setDarkmode] = useState(defaultDark);
 
   const handleClick = () => {
-    console.log(defaultDark)
     if (defaultDark === false) {
       setDark();
       setDarkmode(!darkmode)

@@ -10,7 +10,10 @@ const AddTodo = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (todo === '') alert('please add a new task');
+    if (todo === '') {
+      alert('please add a new task')
+      return
+    }
 
     dispatch(addTodos({id: Date.now().toString() , todo: todo, complete: false}));
 
@@ -20,7 +23,6 @@ const AddTodo = () => {
   return (
     <form onSubmit={handleSubmit} className='addtodo'>
       <input className='input' type='text' placeholder='Elite, your goals for today?' onChange={(e) => setTodo(e.target.value)} value={todo} />
-      <button className='btn'>Add</button>
     </form>
   )
 }

@@ -29,3 +29,18 @@
 .app-header-bg > img {
   cursor: pointer;
 }
+
+@media screen and (max-width: 640px) {
+  .app-header-bg {
+    justify-content: space-between;
+    align-items: center;
+    padding: 5rem 1.3rem;
+    background-image: var(--background-image-mobile);
+  }
+
+  .app-header-bg > h1 {
+    font-size: 24px;
+    padding-right: 1rem;
+    letter-spacing: 0.5rem;
+  }
+}
